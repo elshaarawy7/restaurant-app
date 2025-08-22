@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:redturant_app/core/utils/app_color.dart';
+import 'package:redturant_app/core/utils/app_router.dart';
 import 'package:redturant_app/futcher/ui/widgets/custem_batton.dart';
 import 'package:redturant_app/futcher/ui/widgets/custem_text_field.dart';
 
@@ -97,14 +99,15 @@ class Singin extends StatelessWidget {
 
                           TextButton(
                             child: Text("LogIn" , style: TextStyle(
-                              color: Colors.black, 
+                              color: AppColor.orange, 
                               fontSize: 18 , 
                               fontWeight: FontWeight.bold , 
                             ),), 
                             onPressed: () {
-                              
+                              GoRouter.of(context).push(AppRouter.logup);
+
                             },
-                          )
+                          )  , 
                         ],
                       ) , 
                     ],

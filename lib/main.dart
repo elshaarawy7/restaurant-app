@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redturant_app/core/utils/app_router.dart';
 import 'package:redturant_app/futcher/ui/pages/Onboarding_pages/Onboarding_1..dart';
 import 'package:redturant_app/futcher/ui/pages/page_view.dart';
 
@@ -12,9 +13,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      home: Page_View(),
+      routerConfig: AppRouter.router,
+
     );
   }
 }

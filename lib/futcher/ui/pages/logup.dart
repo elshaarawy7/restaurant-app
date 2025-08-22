@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:redturant_app/core/utils/app_color.dart';
 import 'package:redturant_app/futcher/ui/widgets/custem_batton.dart';
 import 'package:redturant_app/futcher/ui/widgets/custem_text_field.dart';
@@ -16,7 +17,7 @@ class Logup extends StatelessWidget {
             
             children: [
               SizedBox(height: 100,) , 
-              Text("Sing Up" , style: TextStyle(
+              Text("Log In" , style: TextStyle(
                 color: Colors.white , 
                 fontSize: 35 , 
                 fontWeight: FontWeight.bold , 
@@ -24,7 +25,7 @@ class Logup extends StatelessWidget {
                 
               SizedBox(height: 20,) , 
                 
-              Text("please sing in to be started" , style: TextStyle(
+              Text("please sing in to  our exiting acount" , style: TextStyle(
                 color: Colors.white , 
                 fontSize: 20 , 
                 fontWeight: FontWeight.w500 , 
@@ -47,24 +48,16 @@ class Logup extends StatelessWidget {
                 
                       SizedBox(height: 20,) , 
                       CustomTextField(
-                        hintText: 'enter your name', 
+                        hintText: 'example@gmail.com', 
                         controller: TextEditingController(),
-                        labelText: 'Name', 
+                        labelText: 'email', 
                         isPassword: false, 
-                        suffixIcon: Icons.person,
+                        suffixIcon: Icons.email_outlined ,
                       ) ,  
 
                       SizedBox(height: 20,) , 
                 
-                      CustomTextField(
-                        hintText: 'enter your email', 
-                        controller: TextEditingController(),
-                        labelText: 'email', 
-                        isPassword: false, 
-                        suffixIcon: Icons.email_outlined,
-                      ) , 
-
-                      SizedBox(height: 20,) , 
+                    
 
                       CustomTextField(
                         hintText: 'enter your password', 
@@ -89,24 +82,36 @@ class Logup extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Do you already have an account?" , style: TextStyle(
+                          Text("Alrydy have an in acount ?" , style: TextStyle(
                             color: Colors.black , 
                             fontSize: 16 , 
                             fontWeight: FontWeight.w500 , 
                           ),), 
 
                           TextButton(
-                            child: Text("LogIn" , style: TextStyle(
-                              color: Colors.black, 
+                            child: Text("singup" , style: TextStyle(
+                              color: AppColor.orange, 
                               fontSize: 18 , 
                               fontWeight: FontWeight.bold , 
                             ),), 
                             onPressed: () {
-                              
+                              Navigator.pop(context);
                             },
                           )
                         ],
-                      ) , 
+                      ) ,  
+
+                      /// meadi 
+
+                      Text("Or" , style: TextStyle(
+                        color: Colors.grey , 
+                        fontSize: 25 , 
+                        fontWeight: FontWeight.w600 , 
+                      ),)  ,  
+
+                     
+
+
                     ],
                   ),
                 )
