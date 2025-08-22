@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redturant_app/core/utils/app_color.dart';
+import 'package:redturant_app/futcher/ui/widgets/custem_batton.dart';
 import 'package:redturant_app/futcher/ui/widgets/custem_text_field.dart';
 
 class Singin extends StatelessWidget {
@@ -71,7 +72,17 @@ class Singin extends StatelessWidget {
                         labelText: 'passowrd', 
                         isPassword: true, 
                         suffixIcon: Icons.email_outlined,
-                      ) ,
+                      ) , 
+
+                      SizedBox(height: 30,) ,
+
+                      CustomButton(
+                        text: "sing up", 
+                        onPressed: () {
+                          
+                        },
+
+                      )
                     ],
                   ),
                 )
