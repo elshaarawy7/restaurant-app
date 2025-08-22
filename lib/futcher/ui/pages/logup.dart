@@ -3,8 +3,8 @@ import 'package:redturant_app/core/utils/app_color.dart';
 import 'package:redturant_app/futcher/ui/widgets/custem_batton.dart';
 import 'package:redturant_app/futcher/ui/widgets/custem_text_field.dart';
 
-class Singin extends StatelessWidget {
-  const Singin({super.key});
+class Logup extends StatelessWidget {
+  const Logup({super.key});
 
   @override
   Widget build(BuildContext context) {
