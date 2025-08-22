@@ -27,7 +27,22 @@ class Singin extends StatelessWidget {
               fontWeight: FontWeight.w500 , 
             ),) , 
 
-          
+            SizedBox(height: 20,) ,
+
+              Container(
+                height: 200 , 
+                width: double.infinity, 
+                decoration: BoxDecoration(
+                color: Colors.white, 
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15) , 
+                    topRight: Radius.circular(15) ,  
+                  ) ,
+                ), 
+                child: Column(
+                  
+                ),
+              )
           ],
         ),
       ),
