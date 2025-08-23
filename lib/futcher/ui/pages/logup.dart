@@ -3,6 +3,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:redturant_app/core/utils/app_color.dart';
 import 'package:redturant_app/futcher/ui/widgets/custem_batton.dart';
 import 'package:redturant_app/futcher/ui/widgets/custem_text_field.dart';
+import 'package:redturant_app/futcher/ui/widgets/logo_medi.dart';
 
 class Logup extends StatelessWidget {
   const Logup({super.key});
@@ -109,7 +110,7 @@ class Logup extends StatelessWidget {
                         fontWeight: FontWeight.w600 , 
                       ),)  ,  
 
-                     
+                    LogoMedi()  , 
 
 
                     ],

@@ -6,43 +6,47 @@ class LogoMedi extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100) , 
-                          ), 
-                          child: Icon(
-                            Ionicons.logo_facebook , 
-                            color: Colors.blue, 
-                            size: 50,
-                          ),
-                        ),  
-
-                        Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100) , 
-                      ), 
-                      child: Icon(
-                        Ionicons.logo_twitter , 
-                        color: Colors.blue, 
-                        size: 50,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 40),
+      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100) , 
+                              
+                            ), 
+                            child: Icon(
+                              Ionicons.logo_facebook , 
+                              color: Colors.blue, 
+                              size: 50,
+                            ),
+                          ),  
+      
+                          Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100) , 
+                        ), 
+                        child: Icon(
+                          Ionicons.logo_twitter , 
+                          color: Colors.blue, 
+                          size: 50,
+                        ),
+                      ) ,  
+      
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100) , 
+                        ), 
+                        child: Icon(
+                          Ionicons.logo_apple , 
+                          color: Colors.black, 
+                          size: 50,
+                        ),
+                      ) , 
+                          
+                        ],
                       ),
-                    ) ,  
-
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100) , 
-                      ), 
-                      child: Icon(
-                        Ionicons.logo_apple , 
-                        color: Colors.blue, 
-                        size: 50,
-                      ),
-                    ) , 
-                        
-                      ],
-                    );
+    );
   }
 }

@@ -81,7 +81,7 @@ class Singin extends StatelessWidget {
                       CustomButton(
                         text: "sing up", 
                         onPressed: () {
-                          
+                          GoRouter.of(context).push(AppRouter.homepage);
                         },
 
                       ) , 
