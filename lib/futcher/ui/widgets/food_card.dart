@@ -3,7 +3,7 @@ import 'package:redturant_app/futcher/ui/model/food_item.dart';
 // تأكد من استيراد موديل البيانات
 // import 'food_item.dart';
 
-class FoodCard extends StatelessWidget {
+class FoodCard extends StatefulWidget {
   final FoodItem foodItem;
   final VoidCallback onFavoriteTap;
   final VoidCallback onCardTap;
@@ -16,16 +16,23 @@ class FoodCard extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<FoodCard> createState() => _FoodCardState();
+}
+
+class _FoodCardState extends State<FoodCard> {
+  bool isFavourate = false ;
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onCardTap,
+      onTap: widget.onCardTap,
       child: Container(
+        height: 280,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20.0),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
+              color: Colors.black.withOpacity(0.1),
               spreadRadius: 1,
               blurRadius: 10,
               offset: const Offset(0, 5),
@@ -40,21 +47,17 @@ class FoodCard extends StatelessWidget {
               // الصورة
               Expanded(
                 child: Center(
-                  child: Image.network(
-                    foodItem.imageUrl,
+                  child: Image.asset(
+                    widget.foodItem.imageUrl,
                     fit: BoxFit.contain,
-                    // يمكنك إضافة مؤشر تحميل هنا
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return const Center(child: CircularProgressIndicator());
-                    },
+                    
                   ),
                 ),
               ),
               const SizedBox(height: 10),
               // اسم الوجبة
               Text(
-                foodItem.name,
+                widget.foodItem.name,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
@@ -64,7 +67,7 @@ class FoodCard extends StatelessWidget {
               ),
               // وصف الوجبة
               Text(
-                foodItem.description,
+                widget.foodItem.description,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 14,
@@ -82,7 +85,7 @@ class FoodCard extends StatelessWidget {
                       const Icon(Icons.star, color: Colors.amber, size: 18),
                       const SizedBox(width: 4),
                       Text(
-                        foodItem.rating.toString(),
+                        widget.foodItem.rating.toString(),
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
@@ -91,11 +94,15 @@ class FoodCard extends StatelessWidget {
                     ],
                   ),
                   InkWell(
-                    onTap: onFavoriteTap,
+                    onTap: (){
+                      setState(() {
+                        isFavourate = !isFavourate ;
+                      });
+                    },
                     borderRadius: BorderRadius.circular(20),
-                    child: const Icon(
-                      Icons.favorite_border, // يمكنك تغييرها إلى Icons.favorite عند التفعيل
-                      color: Colors.black,
+                    child:  Icon(
+                      isFavourate ? Icons.favorite : Icons.favorite_border, 
+                      color: isFavourate ? Colors. red : Colors.black,
                       size: 24,
                     ),
                   ),

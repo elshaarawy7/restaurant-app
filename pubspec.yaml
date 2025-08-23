@@ -33,6 +33,7 @@ dependencies:
     sdk: flutter
   flutter_svg: ^2.2.0
   go_router: ^16.2.0
+  http: ^1.5.0
   ionicons: ^0.2.2
 
 dev_dependencies:
