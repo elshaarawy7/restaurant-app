@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
 
 class CustomSearchBar extends StatelessWidget {
-  final TextEditingController controller;
   final String hintText;
-  final ValueChanged<String>? onChanged;
+  final ValueChanged<String> onChanged;
+  
 
   const CustomSearchBar({
     Key? key,
-    required this.controller,
-    this.hintText = 'Search',
-    this.onChanged,
+    required this.hintText ,
+    required this.onChanged
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-    
-      controller: controller,
       onChanged: onChanged,
       decoration: InputDecoration(
-        hintText: hintText,
+        hintText: hintText ?? 'Search',
         hintStyle: TextStyle(
           color: Colors.black,
           fontSize: 16,

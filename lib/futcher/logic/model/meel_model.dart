@@ -4,7 +4,6 @@ class Meal {
   final String description;
   final double price;
   final String imageUrl;
-  final int restaurantId;
   final String category;
 
   Meal({
@@ -13,22 +12,19 @@ class Meal {
     required this.description,
     required this.price,
     required this.imageUrl,
-    required this.restaurantId,
     required this.category,
-  }); 
+  });
 
-
-  factory Meal.fromJson(Map<String , dynamic> json){
+  // [!] تعديل: تم تحديث أسماء الحقول لتطابق الـ API الأخير
+  factory Meal.fromJson(Map<String, dynamic> json) {
     return Meal(
-       id: json['id'],
-      name: json['name'],
-      description: json['description'],
-      // التأكد من أن السعر هو double
-      price: (json['price'] as num).toDouble(),
-      imageUrl: json['imageUrl'],
-      restaurantId: json['restaurantId'],
-      category: json['category'],
+      id: json['itemID'] ?? 0, // <--- تم التعديل
+      name: json['itemName'] ?? 'no name', // <--- تم التعديل
+      description: json['itemDescription'] ?? 'No Description', // <--- تم التعديل
+      price: (json['itemPrice'] as num? ?? 0.0).toDouble(), // <--- تم التعديل
+      imageUrl: json['imageUrl'] ?? ' ',
+      category: json['category'] ?? '',
     );
   }
-
 }
+

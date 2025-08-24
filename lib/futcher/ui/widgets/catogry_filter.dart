@@ -6,7 +6,7 @@ class CategoryFilter extends StatefulWidget {
 }
 
 class _CategoryFilterState extends State<CategoryFilter> {
-  int selectedIndex = 0; // أول اختيار (All)
+  int selectedIndex = 0; 
 
   final categories = ["All", "Combos", "Sliders", "Classic"];
 

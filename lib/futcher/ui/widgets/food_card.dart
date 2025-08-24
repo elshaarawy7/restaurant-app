@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:redturant_app/futcher/ui/model/food_item.dart';
-// تأكد من استيراد موديل البيانات
-// import 'food_item.dart';
 
 class FoodCard extends StatefulWidget {
-  final FoodItem foodItem;
+  final String imageUrl;
+  final String name;
+  final String description;
+  final double price; // سنستخدم السعر الآن
   final VoidCallback onFavoriteTap;
   final VoidCallback onCardTap;
 
   const FoodCard({
     Key? key,
-    required this.foodItem,
+    required this.imageUrl,
+    required this.name,
+    required this.description,
+    required this.price, // تم التغيير من rating إلى price
     required this.onFavoriteTap,
     required this.onCardTap,
   }) : super(key: key);
@@ -20,13 +23,13 @@ class FoodCard extends StatefulWidget {
 }
 
 class _FoodCardState extends State<FoodCard> {
-  bool isFavourate = false ;
+  bool isFavorat = false;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: widget.onCardTap,
       child: Container(
-        height: 280,
+        // --- [1] إضافة الظل والحواف الدائرية ---
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20.0),
@@ -39,74 +42,89 @@ class _FoodCardState extends State<FoodCard> {
             ),
           ],
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
+        // --- [2] استخدام ClipRRect لجعل الصورة تأخذ نفس الحواف الدائرية ---
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // الصورة
+              // --- [3] تعديل الصورة ---
               Expanded(
-                child: Center(
-                  child: Image.asset(
-                    widget.foodItem.imageUrl,
-                    fit: BoxFit.contain,
-                    
+                flex: 3, // إعطاء مساحة أكبر للصورة
+                child: SizedBox(
+                  width: double.infinity, // اجعل الصورة تملأ العرض
+                  child: Image.network(
+                    widget.imageUrl,
+                    fit: BoxFit.cover, // [!] أهم تعديل: اجعل الصورة تملأ المساحة مع قص الأجزاء الزائدة
+                    // في حالة كان رابط الصورة فارغاً
+                    errorBuilder: (context, error, stackTrace) {
+                      return const Icon(Icons.fastfood, size: 40, color: Colors.grey);
+                    },
+                    // عرض مؤشر تحميل لكل صورة على حدة
+                    loadingBuilder: (context, child, progress) {
+                      return progress == null ? child : const Center(child: CircularProgressIndicator());
+                    },
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
-              // اسم الوجبة
-              Text(
-                widget.foodItem.name,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              // وصف الوجبة
-              Text(
-                widget.foodItem.description,
-                style: TextStyle(
-                  color: Colors.grey[600],
-                  fontSize: 14,
-                ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 10),
-              // التقييم وزر المفضلة
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
+              // --- [4] إضافة هوامش داخلية للنصوص ---
+              Expanded(
+                flex: 2, // إعطاء مساحة أقل للنصوص
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround, // توزيع المسافات
                     children: [
-                      const Icon(Icons.star, color: Colors.amber, size: 18),
-                      const SizedBox(width: 4),
+                      // --- [5] تنسيق النصوص ---
                       Text(
-                        widget.foodItem.rating.toString(),
+                        widget.name,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(
+                        widget.description,
+                        style: TextStyle(
+                          color: Colors.grey[600],
                           fontSize: 14,
                         ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      // --- [6] تنسيق السعر وزر المفضلة ---
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '\$${widget.price.toStringAsFixed(2)}', // عرض السعر مع علامة الدولار
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Colors.deepOrange, // لون مميز للسعر
+                            ),
+                          ),
+                          InkWell(
+                            onTap: (){
+                              setState(() {
+                                isFavorat = !isFavorat ;
+                              });
+                            },
+                            borderRadius: BorderRadius.circular(20),
+                            child:  Icon(
+                               isFavorat ? Icons.favorite  : Icons.favorite_border,
+                              color:isFavorat? Colors.red : Colors.black54,
+                              size: 24,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  InkWell(
-                    onTap: (){
-                      setState(() {
-                        isFavourate = !isFavourate ;
-                      });
-                    },
-                    borderRadius: BorderRadius.circular(20),
-                    child:  Icon(
-                      isFavourate ? Icons.favorite : Icons.favorite_border, 
-                      color: isFavourate ? Colors. red : Colors.black,
-                      size: 24,
-                    ),
-                  ),
-                ],
+                ),
               ),
             ],
           ),
@@ -115,3 +133,5 @@ class _FoodCardState extends State<FoodCard> {
     );
   }
 }
+
+
