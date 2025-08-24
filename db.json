@@ -17,6 +17,18 @@
       "restaurantName": "Pista House",
       "restaurantID": 5,
       "imageUrl": "https://fakerestaurantapi.runasp.net/images/mutton%20biryani.jpg"
+<<<<<<< HEAD
+=======
+    },
+    {
+      "itemID": 93,
+      "itemName": "Shahi Tukda",
+      "itemDescription": "Bread pudding topped with rabri and nuts.",
+      "itemPrice": 150,
+      "restaurantName": "Pista House",
+      "restaurantID": 5,
+      "imageUrl": "https://fakerestaurantapi.runasp.net/images/shahi-tukda.jpg"
+>>>>>>> a9c0a78f12ca4fabe876078d6cb5e88406ceb05e
     }
   ]
 }
