@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final ApiService _apiService = ApiService();
   bool _isLoading = true;
-  
+
   List<Meal> _allMeals = [];
   List<Meal> _filteredMeals = [];
 
@@ -26,32 +26,26 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _fetchMeals();
-  } 
-
-
-Future<void> _fetchMeals() async {
-  try {
-    final meals = await fetchMeals();
-    setState(() {
-      _allMeals = meals;
-      _filteredMeals = meals;
-      _isLoading = false;
-    });
-  } catch (e) {
-    print(e);
   }
-}
 
-void _filterMeals(String query) {
-  setState(() {
-    _filteredMeals = filterMeals(_allMeals, query);
-  });
-}
+  Future<void> _fetchMeals() async {
+    try {
+      final meals = await fetchMeals();
+      setState(() {
+        _allMeals = meals;
+        _filteredMeals = meals;
+        _isLoading = false;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 
-
-  
-
-  
+  void _filterMeals(String query) {
+    setState(() {
+      _filteredMeals = filterMeals(_allMeals, query);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,65 +57,85 @@ void _filterMeals(String query) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 50),
-            
+
             // [!] الاستدعاء الصحيح لـ CustomSearchBar
             CustomSearchBar(
               hintText: 'Search for food...',
               onChanged: (query) {
                 _filterMeals(query); // <-- استدعاء دالة الفلترة
-                
-              }, 
+              },
             ),
-// 
+            //
             const SizedBox(height: 20),
-            CategoryFilter(), 
-            SizedBox(height: 20,) , 
+            CategoryFilter(),
+            SizedBox(height: 20),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [ 
-                Text("Manus" , style: TextStyle(
-                  color: Colors.black , 
-                  fontSize: 20 , 
-                  fontWeight: FontWeight.bold , 
-                ),), 
+              children: [
+                Text(
+                  "Manus",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
 
-                IconButton(
-                  onPressed: (){
-                    GoRouter.of(context).push(AppRouter.home_page_details) ;
-                  },
-                  icon: Icon(Icons.arrow_back_ios , color: Colors.black , size: 20,),
-                ) , 
+               TextButton(
+                onPressed: () {
+                    GoRouter.of(context).push(AppRouter.home_page_details);
+                  
+                },
+                 child: Container(
+                  height: 50 , 
+                  width: 80 , 
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12) , 
+                    color: Colors.red , 
+                  ), 
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+                    child: Text("order" , style: TextStyle(
+                      color: Colors.white , 
+                      fontSize: 16 ,  
+                      fontWeight: FontWeight.bold
+                    ),  
+                    ),
+                  ),
+                 )
+                 )
               ],
-            ) , 
-
+            ),
 
             const SizedBox(height: 20),
             Expanded(
               child: _isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : _filteredMeals.isEmpty
-                      ? const Center(child: Text('No matching meals found.'))
-                      : GridView.builder(
-                          itemCount: _filteredMeals.length,
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  ? const Center(child: Text('No matching meals found.'))
+                  : GridView.builder(
+                      itemCount: _filteredMeals.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             crossAxisSpacing: 10,
                             childAspectRatio: 0.75,
                             mainAxisSpacing: 15.0,
                           ),
-                          itemBuilder: (context, index) {
-                            final meal = _filteredMeals[index];
-                            return FoodCard(
-                              imageUrl: meal.imageUrl,
-                              name: meal.name,
-                              description: meal.description,
-                              price: meal.price,
-                              onCardTap: () {},
-                              onFavoriteTap: () {},
-                            );
+                      itemBuilder: (context, index) {
+                        final meal = _filteredMeals[index];
+                        return FoodCard(
+                          imageUrl: meal.imageUrl,
+                          name: meal.name,
+                          description: meal.description,
+                          price: meal.price,
+                          onCardTap: () {
                           },
-                        ),
+                          onFavoriteTap: () {},
+                        );
+                      },
+                    ),
             ),
           ],
         ),
@@ -129,4 +143,3 @@ void _filterMeals(String query) {
     );
   }
 }
-

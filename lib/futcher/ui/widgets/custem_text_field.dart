@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomTextField extends StatelessWidget {
   final String labelText;
@@ -8,6 +9,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final TextEditingController controller;
   final VoidCallback? onSuffixIconTap;
+  final bool isNumeric; // ✅ جديد (هل الحقل يقبل أرقام فقط؟)
 
   const CustomTextField({
     Key? key,
@@ -18,6 +20,7 @@ class CustomTextField extends StatelessWidget {
     this.isPassword = false,
     this.keyboardType = TextInputType.text,
     this.onSuffixIconTap,
+    this.isNumeric = false, // default false
   }) : super(key: key);
 
   @override
@@ -29,17 +32,20 @@ class CustomTextField extends StatelessWidget {
         children: [
           Text(
             labelText.toUpperCase(),
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
             ),
           ),
           const SizedBox(height: 8),
           TextFormField(
             controller: controller,
             obscureText: isPassword,
-            keyboardType: keyboardType,
+            keyboardType: isNumeric ? TextInputType.number : keyboardType, // ✅ رقم أو نص
+            inputFormatters: isNumeric
+                ? [FilteringTextInputFormatter.digitsOnly] // ✅ أرقام فقط
+                : [],
             decoration: InputDecoration(
               hintText: hintText,
               hintStyle: TextStyle(color: Colors.grey[400]),
@@ -63,3 +69,4 @@ class CustomTextField extends StatelessWidget {
     );
   }
 }
+
