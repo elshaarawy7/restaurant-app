@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:redturant_app/core/utils/Function/meal_functions.dart';
 import 'package:redturant_app/core/utils/api_servies.dart';
+import 'package:redturant_app/core/utils/app_router.dart';
 import 'package:redturant_app/futcher/logic/model/meel_model.dart';
 import 'package:redturant_app/futcher/ui/widgets/catogry_filter.dart';
 import 'package:redturant_app/futcher/ui/widgets/custem_search_bar.dart';
 import 'package:redturant_app/futcher/ui/widgets/food_card.dart';
-// ... باقي استيراداتك
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,29 +26,32 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _fetchMeals();
-  }
+  } 
 
-  Future<void> _fetchMeals() async {
-    try {
-      final meals = await _apiService.getMeals();
-      setState(() {
-        _allMeals = meals;
-        _filteredMeals = meals;
-        _isLoading = false;
-      });
-    } catch (e) { /* ... */ }
-  }
 
-  // دالة الفلترة الصحيحة
-  void _filterMeals(String query) {
-    final lowerCaseQuery = query.toLowerCase();
+Future<void> _fetchMeals() async {
+  try {
+    final meals = await fetchMeals();
     setState(() {
-      _filteredMeals = _allMeals.where((meal) {
-        final mealName = meal.name.toLowerCase();
-        return mealName.contains(lowerCaseQuery);
-      }).toList();
+      _allMeals = meals;
+      _filteredMeals = meals;
+      _isLoading = false;
     });
+  } catch (e) {
+    print(e);
   }
+}
+
+void _filterMeals(String query) {
+  setState(() {
+    _filteredMeals = filterMeals(_allMeals, query);
+  });
+}
+
+
+  
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +60,7 @@ class _HomePageState extends State<HomePage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 50),
             
@@ -66,10 +72,31 @@ class _HomePageState extends State<HomePage> {
                 
               }, 
             ),
+// 
+            const SizedBox(height: 20),
+            CategoryFilter(), 
+            SizedBox(height: 20,) , 
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [ 
+                Text("Manus" , style: TextStyle(
+                  color: Colors.black , 
+                  fontSize: 20 , 
+                  fontWeight: FontWeight.bold , 
+                ),), 
+
+                IconButton(
+                  onPressed: (){
+                    GoRouter.of(context).push(AppRouter.home_page_details) ;
+                  },
+                  icon: Icon(Icons.arrow_back_ios , color: Colors.black , size: 20,),
+                ) , 
+              ],
+            ) , 
+
 
             const SizedBox(height: 20),
-            CategoryFilter(),
-            const SizedBox(height: 50),
             Expanded(
               child: _isLoading
                   ? const Center(child: CircularProgressIndicator())

@@ -3,6 +3,7 @@ import 'package:redturant_app/futcher/ui/pages/Onboarding_pages/Onboarding_1..da
 import 'package:redturant_app/futcher/ui/pages/Onboarding_pages/Onboarding_2.dart';
 import 'package:redturant_app/futcher/ui/pages/Onboarding_pages/Onboarding_3.dart';
 import 'package:redturant_app/futcher/ui/pages/Onboarding_pages/Onboarding_4.dart';
+import 'package:redturant_app/futcher/ui/pages/home_page_detiles.dart';
 import 'package:redturant_app/futcher/ui/pages/singin.dart';
 
 class Page_View extends StatefulWidget {
@@ -22,6 +23,7 @@ class _Page_ViewState extends State<Page_View> {
     Onboarding3(),
     Onboarding4(), 
     Singin(),
+    HomePageDetiles() ,
     
   ];
 
