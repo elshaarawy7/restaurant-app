@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:redturant_app/core/utils/app_router.dart';
 import 'package:redturant_app/futcher/ui/widgets/custem_batton.dart';
 import 'package:redturant_app/futcher/ui/widgets/custem_text_field.dart';
 
@@ -48,7 +50,7 @@ class DataUser extends StatelessWidget {
           CustomButton(
             text: "Confirm Order" ,
             onPressed: () {
-              
+              GoRouter.of(context).push(AppRouter.pymantPage) ;
             },
           ) ,
         ],

@@ -3,6 +3,7 @@ import 'package:redturant_app/futcher/ui/pages/data_user.dart';
 import 'package:redturant_app/futcher/ui/pages/home_page.dart';
 import 'package:redturant_app/futcher/ui/pages/home_page_detiles.dart';
 import 'package:redturant_app/futcher/ui/pages/page_view.dart';
+import 'package:redturant_app/futcher/ui/pages/payment_page.dart';
 
 
 class AppRouter {
@@ -10,6 +11,7 @@ class AppRouter {
   static const homepage = '/homepage';
   static const home_page_details = '/home_page_details' ;
   static const userData = '/userData' ;
+  static const pymantPage = '/pymantPage' ;
 
 
   static final router = GoRouter(
@@ -32,6 +34,11 @@ class AppRouter {
       GoRoute(
         path: userData , 
         builder: (context, state) => DataUser(),
+      ) , 
+
+      GoRoute(
+        path: pymantPage , 
+        builder: (context, state) => PaymentPage(),
       )
       
     ],

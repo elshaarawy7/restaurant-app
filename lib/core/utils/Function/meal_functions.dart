@@ -1,11 +1,8 @@
 
 
-import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:redturant_app/core/utils/api_servies.dart';
-import 'package:redturant_app/core/utils/app_router.dart';
 import 'package:redturant_app/futcher/logic/model/meel_model.dart';
 import 'package:redturant_app/futcher/ui/widgets/card_detiles.dart';
 
@@ -48,7 +45,10 @@ List<Meal> filterMeals(List<Meal> allMeals, String query) {
       options: CarouselOptions(
         height: 200,
         viewportFraction: 0.4,
-        enableInfiniteScroll: false, // من الأفضل إيقافها إذا كانت القائمة قصيرة
+        enableInfiniteScroll:true,  
+        autoPlay: true , 
+        autoPlayInterval: Duration(seconds:  3) , 
+        enlargeCenterPage: true,
       ),
     );
   }
